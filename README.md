@@ -56,4 +56,4 @@ La aplicación de gestión de información de la clínica tiene como objetivo pr
 
 ## 📝 Licencia
 
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE) para más detalles.
