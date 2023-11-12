@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos Paciente enfermera</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            width: 350px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2185c5;
+        }
+
+        .error {
+            color: #e74c3c;
+            margin-top: 10px;
+        }
+
+        /* Add some spacing between form elements */
+        form > * {
+            margin-bottom: 20px;
+        }
+
+        /* Center submit button */
+        input[type="submit"] {
+            margin: 20px auto 0;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ingrese los datos del paciente</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="cedula">Cédula:</label>
+        <input type="text" id="cedula" name="cedula" value="{{campo_cedula}}">
+        <input type="submit" value="Verificar Cédula" name="verificar_cedula"><br>
+
+        <!-- Presión Arterial -->
+        <label for="presion_arterial">Presión Arterial:</label>
+        <input type="text" id="presion_arterial" name="presion_arterial" {% if not paciente %}disabled{% endif %} required><br>
+
+        <!-- Temperatura -->
+        <label for="temperatura">Temperatura:</label>
+        <input type="text" id="temperatura" name="temperatura" {% if not paciente %}disabled{% endif %} required><br>
+
+        <!-- Pulso -->
+        <label for="pulso">Pulso:</label>
+        <input type="text" id="pulso" name="pulso" {% if not paciente %}disabled{% endif %} required><br>
+
+        <!-- Nivel de Oxígeno en Sangre -->
+        <label for="nivel_oxigeno_sangre">Nivel de Oxígeno en Sangre:</label>
+        <input type="text" id="nivel_oxigeno_sangre" name="nivel_oxigeno_sangre" {% if not paciente %}disabled{% endif %} required><br>
+
+        <!-- Botón para guardar los datos en la base de datos -->
+        <input type="submit" value="Guardar Datos" name="guardar_datos" {% if not paciente %}disabled{% endif %}>
+
+        <!-- Otros campos -->
+        {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+        {% endif %}
+    </form>
+</body>
+</html>

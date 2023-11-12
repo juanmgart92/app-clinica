@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario de Información del Paciente</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #ecf0f1;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Información del Paciente</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br>
+
+        <label for="cedula">Cédula:</label>
+        <input type="number" id="cedula" name="cedula" pattern="[0-9]+" required>
+        <br>
+
+        <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+        <br>
+
+        <label for="genero">Género:</label>
+        <select id="genero" name="genero" required>
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
+            <option value="otro">Otro</option>
+        </select>
+        <br>
+
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" required>
+        <br>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" pattern="[0-9]+" required>
+        <br>
+
+        <label for="correo">Correo Electrónico:</label>
+        <input type="email" id="correo" name="correo" required>
+        <br>
+
+        <label for="nombre_contacto_emergencia">Nombre del Contacto de Emergencia:</label>
+        <input type="text" id="nombre_contacto_emergencia" name="nombre_contacto_emergencia" required>
+        <br>
+
+        <label for="relacion_paciente">Relación con el Paciente:</label>
+        <input type="text" id="relacion_paciente" name="relacion_paciente" required>
+        <br>
+
+        <label for="numero_emergencia">Número de Emergencia:</label>
+        <input type="tel" id="numero_emergencia" name="numero_emergencia" pattern="[0-9]+" required>
+        <br>
+
+        <label for="nombre_compania_seguros">Nombre de la Compañía de Seguros:</label>
+        <input type="text" id="nombre_compania_seguros" name="nombre_compania_seguros" required>
+        <br>
+
+        <label for="estado_poliza">Estado de la Póliza:</label>
+        <select id="estado_poliza" name="estado_poliza" required>
+            <option value="si">Sí</option>
+            <option value="no">No</option>
+        </select>
+        <br>
+        
+        <h2>Programar cita</h2>
+        
+        <label for="fecha_cita">Fecha de la cita:</label>
+        <input type="date" id="fecha_cita" name="fecha_cita" required>
+
+        <label for="hora_cita">Hora de la cita:</label>
+        <input type="time" id="hora_cita" name="hora_cita" required>
+        <!-- Fin de nuevos campos -->
+
+        <br>
+        </br>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>

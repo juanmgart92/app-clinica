@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro de Paciente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        form {
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 30px;
+            border: 1px solid #dcdcdc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #dcdcdc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        .error {
+            color: #d9534f;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        #campos-diagnostico, #campos-procedimiento {
+            display: none;
+        }
+
+        .tipo-label {
+            color: #007bff;
+        }
+    </style>
+    <script>
+        function toggleCampos(select) {
+            const tipo = select.value;
+            const camposDiagnostico = document.getElementById("campos-diagnostico");
+            const camposProcedimiento = document.getElementById("campos-procedimiento");
+
+            if (tipo === "diagnostico") {
+                camposDiagnostico.style.display = "block";
+                camposProcedimiento.style.display = "none";
+            } else if (tipo === "procedimiento") {
+                camposDiagnostico.style.display = "none";
+                camposProcedimiento.style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Registro de Paciente</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="cedula">Cédula:</label>
+        <input type="text" id="cedula" name="cedula" required>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" required>
+
+        <label for="cedula_medico">Cédula del Médico:</label>
+        <input type="text" id="cedula_medico" name="cedula_medico"  readonly  value= {{ mensaje }} required>
+
+        <label for="motivo_consulta">Motivo de Consulta:</label>
+        <textarea id="motivo_consulta" name="motivo_consulta" rows="4" required></textarea>
+
+        <label for="sintomatologia">Sintomatología:</label>
+        <textarea id="sintomatologia" name = "sintomatologia" rows="4" required></textarea>
+
+        <label for="diagnosticoo">Dianostico:</label>
+        <textarea id="diagnosticoo" name = "diagnosticoo" rows="4" required></textarea>
+
+        <label for="numero_orden_medicamentos">Numero orden medicamento</label>
+        <input type="text" id="numero_orden_medicamentos" name="numero_orden_medicamentos" required>
+
+        <label for="nombre_medicamento">Nombre medicamento</label>
+        <input type="text" id="nombre_medicamento" name="nombre_medicamento" required>
+
+        <label for="dosis">Dosis</label>
+        <input type="text" id="dosis" name="dosis" required>
+
+        <label for="duracion">Duracion</label>
+        <input type="text" id="duracion" name="duracion" required>
+
+
+        <label for="diagnostico" class="tipo-label">Tipo:</label>
+        <select id="tipo" name="tipo" onchange="toggleCampos(this)">
+            <option value=".....">Selecccione una opcion</option>
+            <option value="diagnostico">Diagnóstico</option>
+            <option value="procedimiento">Procedimiento</option>
+        </select>
+
+        <div id="campos-diagnostico">
+            <label for="numero_orden_diagnostico">Número de Orden del Diagnóstico:</label>
+            <input type="text" id="numero_orden_diagnostico" name="numero_orden_diagnostico">
+            <label for="nombre_diagnostico">Nombre del Diagnóstico:</label>
+            <input type="text" id="nombre_diagnostico" name="nombre_diagnostico">
+            <label for="cantidad_diagnostico">Cantidad del Diagnóstico:</label>
+            <input type="text" id="cantidad_diagnostico" name="cantidad_diagnostico">
+            <label for="requiere_asistencia_diagnostico">Requiere Asistencia de Diagnóstico:</label>
+            <input type="checkbox" id="requiere_asistencia_diagnostico" name="requiere_asistencia_diagnostico">
+        </div>
+
+        <div id="campos-procedimiento">
+            <label for="numero_orden_procedimiento">Número de Orden del Procedimiento:</label>
+            <input type="text" id="numero_orden_procedimiento" name="numero_orden_procedimiento">
+            <label for="nombre_procedimiento">Nombre del Procedimiento:</label>
+            <input type="text" id="nombre_procedimiento" name="nombre_procedimiento">
+            <label for="cantidad_procedimiento">Cantidad del Procedimiento:</label>
+            <input type="text" id="cantidad_procedimiento" name="cantidad_procedimiento">
+            <label for="frecuencia_procedimiento">Frecuencia del Procedimiento:</label>
+            <input type="text" id="frecuencia_procedimiento" name="frecuencia_procedimiento">
+            <label for="requiere_asistencia_procedimiento">Requiere Asistencia de Procedimiento:</label>
+            <input type="checkbox" id="requiere_asistencia_procedimiento" name="requiere_asistencia_procedimiento">
+        </div>
+
+        <p id="error-message" class="error"></p>
+
+        <input type="submit" value="Guardar Datos">
+    </form>
+</body>
+</html>
